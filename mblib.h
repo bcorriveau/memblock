@@ -10,7 +10,7 @@
  *      - All memory is allocated from the OS on initialization
  *      - Speed. Allocation and freeing of blocks is done in User Space (no OS calls)
  *      - Memory fragmentation is limited as all memory blocks are rounded to the
- *          closest power of 2
+ *          closest multiple of the smallest block size
  *      - Small overhead per memory block (4 bits)
  *
  * Memory is malloc'ed with mbinit() on initialization, and then mballoc() and 
