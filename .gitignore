@@ -1,0 +1,5 @@
+libmb.a
+libmb.so
+mblib.o
+test/mbtest
+test/mbtest_dyn

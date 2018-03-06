@@ -7,8 +7,9 @@ clean:
 
 libmb.so : mblib.o
 	gcc -o libmb.so mblib.o -shared
-	ar rcs libmb.a mblib.o
 
+libmb.a : mblib.o
+	ar rcs libmb.a mblib.o
 
 mblib.o : mblib.c mblib.h
 	gcc -c -g -Wall mblib.c -fpic
