@@ -51,7 +51,7 @@ The mbstatget() function returns the number of blocks per space, and a pointer t
 
 The mbdumpstat() function prints out the space block statistics.
 
-The mbdumpmap() function prints of the space maps.
+The mbdumpmap() function prints out the space maps.
 
 The mbtestfree() function returns 1 if no memory is allocated in either space, 0 otherwise.
 
