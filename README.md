@@ -12,6 +12,9 @@ in bytes for each space:
 -  small blocks :  16,  32,  48,   64,   80,   96,  112,  128
 -  big blocks   : 256, 512, 768, 1024, 1280, 1536, 1792, 2048
 
+Each memory space is managed by a block map where each block is represented
+by 4 bits.
+
 ## API Reference
 ```
 #include <mblib.h>
@@ -67,10 +70,19 @@ The benefits of this memory library are:
 
 ## Code Example
 ```
-mbinit(1 ,1)
+mbinit(1 ,1);
 datap = mballoc(size);
 mbfree(datap);
 mbterm();
+```
+## Running the test code
+```
+$ cd memblock
+$ make
+$ cd test
+$ make
+$ ./mbtest
+$ ./mbtest_dyn
 ```
 ## Possible Improvements
 - More memory spaces

@@ -36,16 +36,19 @@ verify(unsigned char *dp, int size)
     }
 }
 
+/* k small blocks and k big blocks to allocate */
+#define KSB     2
+#define KBB     3
 
 int main()
 {
-    int i,j, cursize;
+    int i, j, cursize;
     int mballocsz[20] = {128, 64, 48, 48, 64, 128, 16,   64,  48, 128,
         48, 48, 64, 64, 80,  80, 256, 300, 129, 9000};
-    static void *p[2048];
-    static int sz[2048];
+    static void *p[1024 * (KSB+KBB)];
+    static int  sz[1024 * (KSB+KBB)];
 
-    mbinit(2,1);
+    mbinit(KSB,KBB);
     mbdumpmap();
     mbdumpstat();
     assert(mbtestfree());
@@ -78,22 +81,24 @@ int main()
 
     printf("\nTest 2 - Allocate max smallest blocks in small and big block space verify\n");
     printf("allocating and writing...\n");
-    for (i=0,j=0; i < 1024; i++)
-    {
-        p[j] = mballoc(16);
-        fill(p[j++], 16);
-        p[j] = mballoc(256);
-        fill(p[j++], 256);
+    i=0;
+    while (NULL != (p[i] = mballoc(16))) {
+        fill(p[i++], 16);
+    }
+    while (NULL != (p[i] = mballoc(256))) {
+        fill(p[i++], 256);
     }
     mbdumpmap();
     mbdumpstat();
+    j = 0;
     printf("verifying and freeing...\n");
-    for (i=0,j=0; i < 1024; i++)
-    {
+    for (i=0; i < (KSB * 1024); i++, j++){
         verify(p[j], 16);
-        mbfree(p[j++]);
+        mbfree(p[j]);
+    }
+    for (i=0; i < (KBB * 1024); i++, j++) {
         verify(p[j], 256);
-        mbfree(p[j++]);
+        mbfree(p[j]);
     }
     mbdumpmap();
     mbdumpstat();
