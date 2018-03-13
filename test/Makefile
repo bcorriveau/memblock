@@ -9,3 +9,6 @@ mbtest :  mbtest.c
 
 mbtest_dyn: mbtest.c
 	gcc -Wall -g -o mbtest_dyn mbtest.c ../libmb.so
+
+memcheck:
+	valgrind --leak-check=full ./mbtest
