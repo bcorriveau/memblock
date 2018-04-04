@@ -107,7 +107,7 @@ mbterm();
  *            If NULL returned check mberr code for reason
  */
 void *
-mballoc(int size);
+mballoc(unsigned long);
 
 /**
  * \brief

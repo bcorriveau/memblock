@@ -362,7 +362,7 @@ mbterm()
  *            If NULL returned check mberr code for reason
  */
 void *
-mballoc(int size)
+mballoc(unsigned long size)
 {
     int         i, nwords, wi;
     uint16      mi;
