@@ -29,7 +29,7 @@ typedef enum { MBERR_OK = 0,
 } MBERR;
 
 void mbinit(k_smallest_blocks_small_block_space, k_smallest_blocks_big_block_space);
-void *mballoc(int size);
+void *mballoc(unsigned long size);
 void mbfree(void *ptr);
 MBERR mberr(void);
 const char *mberrstr(MBERR err);
