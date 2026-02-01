@@ -48,10 +48,13 @@ int main()
     static void *p[1024 * (KSB+KBB)];
     static int  sz[1024 * (KSB+KBB)];
 
+    printf("Memblock test\n\n");
     mbinit(KSB,KBB);
+    printf("Dumping initial memory space maps\n");
     mbdumpmap();
     mbdumpstat();
     assert(mbtestfree());
+    printf("Memory allocated from OS, and all memory blocks all unallocated\n\n");
 
     printf("Test 1 - Do some basic allcation, writing, and free of blocks\n");
     printf("allocating and writing...\n");
@@ -62,6 +65,8 @@ int main()
             fill(p[i], mballocsz[i]);
         } else {
             printf("Alloc size: %d  Error:%s\n", mballocsz[i], mberrstr(mberr()));
+	    assert(mballocsz[i] == 9000);
+	    printf("Test 1a - Passed test of trying to allocate too much memory\n");
         }
     }
     mbdumpmap();
@@ -78,6 +83,7 @@ int main()
     mbdumpmap();
     mbdumpstat();
     assert(mbtestfree());
+    printf("Test 1 - Passed\n");
 
     printf("\nTest 2 - Allocate max smallest blocks in small and big block space verify\n");
     printf("allocating and writing...\n");
@@ -103,6 +109,7 @@ int main()
     mbdumpmap();
     mbdumpstat();
     assert(mbtestfree());
+    printf("Test 2 - Passed\n");
 
     printf("\nTest 3 - Allocate array of different sizes and then fill in the gaps for small and big block space. \nAlso write and verify blocks before freeing\n");
     printf("allocating and writing...\n");
@@ -168,6 +175,10 @@ int main()
     mbdumpmap();
     mbdumpstat();
     assert(mbtestfree());
+    printf("Test 3 - All memory blocks allocated and then succesfully freed\n");
+    printf("\nTest 3 - Passed\n");
 
     mbterm();
+
+    printf("Memblock - All Tests Passed\n");
 }
