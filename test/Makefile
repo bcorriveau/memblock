@@ -1,5 +1,5 @@
 # mblib test program makefile
-all : mbtest mbtest_dyn
+all : mbtest mbtest_dyn memcheck
 
 clean:
 	rm -f mbtest mbtest_dyn

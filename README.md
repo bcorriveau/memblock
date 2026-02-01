@@ -39,24 +39,28 @@ void mbdumpmap();
 int mbtestfree();
 void mbterm();
 
-The mbinit() function initializes the memory space maps with the given number of smallest sized blocks.
+The mbinit() function allocates and initializes the memory space maps and space
+blocks for the requested sizes.
 
-The mballoc() function allocates size bytes of memory rounded up to the closest block size. Any block 
-size that fits in the corresponding space may be allocated.
+The mballoc() function allocates size bytes of memory rounded up to the closest
+block size. Any block size that fits in the corresponding space may be allocated.
 
 The mbfree() function frees the memory pointed to by ptr.
 
 The mberr() function returns the last generated mblib error.
 
-The mberrstr() function returns a pointer to an error string for the last generated mblib error.
+The mberrstr() function returns a pointer to an error string for the last generated
+mblib error.
 
-The mbstatget() function returns the number of blocks per space, and a pointer to the space block statistics.
+The mbstatget() function returns the number of blocks per space, and a pointer
+to the space block statistics.
 
 The mbdumpstat() function prints out the space block statistics.
 
 The mbdumpmap() function prints out the space maps.
 
-The mbtestfree() function returns 1 if no memory is allocated in either space, 0 otherwise.
+The mbtestfree() function returns 1 if no memory is allocated in either space,
+                                  0 otherwise.
 
 The mbterm() function frees the memory allocated by mbinit().
 ```
@@ -70,6 +74,9 @@ The benefits of this memory library are:
 
 ## Code Example
 ```
+/* allocate room for 1024 small space 16 byte blocks
+ *               and 1024 large space 256 byte blocks
+ */
 mbinit(1 ,1);
 datap = mballoc(size);
 mbfree(datap);
